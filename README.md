@@ -80,8 +80,8 @@ Initiate fingerprint capture:
 rdServiceManager.captureRdService(data);
 ```
 
-### Configuration
+## Configuration
 _TODO_
 
-### Examples
+## Examples
 _TODO_
