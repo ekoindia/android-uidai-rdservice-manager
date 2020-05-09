@@ -1,0 +1,3 @@
+rootProject.name='UIDAI-RDService-Manager-Lib'
+include ':app'
+include ':uidai-rdservice-manager-lib'
