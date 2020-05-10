@@ -10,7 +10,7 @@ Android library to easily integrate fingerprint device support in your app (for 
 
 ### STEP 1: Add library in your Android project
 
-Add jitpack in your root build.gradle at the end of repositories:
+Add jitpack in your root build.gradle file:
 ```java
 allprojects {
   repositories {
