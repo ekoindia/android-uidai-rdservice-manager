@@ -56,24 +56,19 @@ protected void onCreate(Bundle savedInstanceState)
 Setup RDService event callbacks:
 ```java
 @Override
-public void onRDServiceDriverDiscovery(String rdServiceInfo, String rdServicePackage) {
-}
+public void onRDServiceDriverDiscovery(String rdServiceInfo, String rdServicePackage) {}
 
 @Override
-public void onRDServiceCaptureResponse(String pidData) {
-}
+public void onRDServiceCaptureResponse(String pidData) {}
 
 @Override
-public void onRDServiceDriverDiscoveryFailed(int resultCode, Intent data, String pkg, String reason) { reason);
-}
+public void onRDServiceDriverDiscoveryFailed(int resultCode, Intent data, String pkg, String reason) {}
 
 @Override
-public void onRDServiceDriverNotFound() {
-}
+public void onRDServiceDriverNotFound() {}
 
 @Override
-public void onRDServiceCaptureFailed(int resultCode, Intent data, String pkg) {
-}
+public void onRDServiceCaptureFailed(int resultCode, Intent data, String pkg) {}
 ```
 
 Search for installed RDService drivers:
