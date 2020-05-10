@@ -1,5 +1,5 @@
 # Android UIDAI RD-Service Manager
-Android library to easily integrate fingerprint device support in your app (for UIDAI based secure Aadhaar authentication in India).
+Android library to easily integrate fingerprint device support in your app (for UIDAI based secure Aadhaar authentication in India). Use it to build AePS (Aadhaar based Cash-Out) or eKYC services in your app.
 
 <img alt="JitPack" src="https://img.shields.io/jitpack/v/github/ekoindia/android-uidai-rdservice-manager"></a>
 <a href="https://github.com/ekoindia/android-uidai-rdservice-manager/issues">![GitHub issues](https://img.shields.io/github/issues/ekoindia/android-uidai-rdservice-manager)</a>
