@@ -1,7 +1,9 @@
 # Android UIDAI RD-Service Manager
 Android library to easily integrate fingerprint device support in your app (for UIDAI based secure Aadhaar authentication in India).
 
-[![GitHub issues](https://img.shields.io/github/issues/ekoindia/android-uidai-rdservice-manager)](https://github.com/ekoindia/android-uidai-rdservice-manager/issues)  [![GitHub license](https://img.shields.io/github/license/ekoindia/android-uidai-rdservice-manager)](https://github.com/ekoindia/android-uidai-rdservice-manager/blob/master/LICENSE)
+<a href="https://github.com/ekoindia/android-uidai-rdservice-manager/issues">![GitHub issues](https://img.shields.io/github/issues/ekoindia/android-uidai-rdservice-manager)</a>
+<a href="https://github.com/ekoindia/android-uidai-rdservice-manager/blob/master/LICENSE">![GitHub license](https://img.shields.io/github/license/ekoindia/android-uidai-rdservice-manager)</a>
+<a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fekoindia%2Fandroid-uidai-rdservice-manager" target="_blank"><img alt="Twitter" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fekoindia%2Fandroid-uidai-rdservice-manager"></a>
 <a href="https://twitter.com/intent/follow?screen_name=ekospeaks" target="_blank">![Twitter Follow](https://img.shields.io/twitter/follow/ekospeaks?label=Follow&style=social)</a>
 
 ---
