@@ -12,6 +12,14 @@ Use it to build your own AePS (Aadhaar based Cash-Out) or eKYC services for Andr
 
 ---
 
+## Introduction
+
+As per [UIDAI](https://uidai.gov.in) (Aadhaar) guidelines, only registered biometric devices can be used for Aadhaar Authentication & eKYC transactions. These devices come with RDService drivers (usually available on PlayStore) that exposes a standard API.
+
+This library makes it easy to work with all such devices so that your app can search for installed drivers and get the fingerprint data after a scan.
+
+For reference, you may check out the latest [Aadhaar Registered Devices Technical Specification v2 by UIDAI](https://uidai.gov.in/images/resource/Aadhaar_Registered_Devices_2_0_4.pdf)
+
 ## Usage
 
 ### STEP 1: Add library in your Android project
