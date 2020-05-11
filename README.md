@@ -56,19 +56,29 @@ protected void onCreate(Bundle savedInstanceState)
 Setup RDService event callbacks:
 ```java
 @Override
-public void onRDServiceDriverDiscovery(String rdServiceInfo, String rdServicePackage) {}
+public void onRDServiceDriverDiscovery(String rdServiceInfo, String rdServicePackage) {
+  // Called when an installed driver is discovered
+}
 
 @Override
-public void onRDServiceCaptureResponse(String pidData) {}
+public void onRDServiceCaptureResponse(String pidData, String rdServicePackage) {
+  // Called when fingerprint is successfully captured
+}
 
 @Override
-public void onRDServiceDriverDiscoveryFailed(int resultCode, Intent data, String pkg, String reason) {}
+public void onRDServiceDriverDiscoveryFailed(int resultCode, Intent data, String rdServicePackage, String reason) {
+  // Called when a discovered driver fails to provide a proper status information 
+}
 
 @Override
-public void onRDServiceDriverNotFound() {}
+public void onRDServiceDriverNotFound() {
+  // Called when no installed driver is found
+}
 
 @Override
-public void onRDServiceCaptureFailed(int resultCode, Intent data, String pkg) {}
+public void onRDServiceCaptureFailed(int resultCode, Intent data, String rdServicePackage) {
+  // Called when fingerprint capture fails
+}
 ```
 
 Search for installed RDService drivers:
