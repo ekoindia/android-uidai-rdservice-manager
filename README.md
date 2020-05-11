@@ -104,7 +104,7 @@ rdServiceManager.captureRdService(data);
 _TODO_
 
 ## Javadocs
-https://ekoindia.github.io/android-uidai-rdservice-manager/
+https://ekoindia.github.io/android-uidai-rdservice-manager
 
 ## Examples
 _TODO_
