@@ -1,2 +1,88 @@
 # Android UIDAI RD-Service Manager
-Android helper library library to easily integrate any fingerprint device in your app (for UIDAI based secure Aadhaar authentication in India)
+Android library to easily integrate fingerprint device support in your app (for UIDAI based secure Aadhaar authentication in India). 
+
+Use it to build your own AePS (Aadhaar based Cash-Out) or eKYC services for Android.
+
+<img alt="JitPack" src="https://img.shields.io/jitpack/v/github/ekoindia/android-uidai-rdservice-manager"></a>
+<a href="https://github.com/ekoindia/android-uidai-rdservice-manager/issues">![GitHub issues](https://img.shields.io/github/issues/ekoindia/android-uidai-rdservice-manager)</a>
+<a href="https://github.com/ekoindia/android-uidai-rdservice-manager/blob/master/LICENSE">![GitHub license](https://img.shields.io/github/license/ekoindia/android-uidai-rdservice-manager)</a>
+<a href="https://eko.in" target="_blank">![Develop With Eko.in](https://img.shields.io/badge/Develop%20with-Eko.in-brightgreen)</a>
+<a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fekoindia%2Fandroid-uidai-rdservice-manager" target="_blank"><img alt="Twitter" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fekoindia%2Fandroid-uidai-rdservice-manager"></a>
+<a href="https://twitter.com/intent/follow?screen_name=ekospeaks" target="_blank">![Twitter Follow](https://img.shields.io/twitter/follow/ekospeaks?label=Follow&style=social)</a>
+
+---
+
+## Usage
+
+### STEP 1: Add library in your Android project
+
+Add jitpack in your root build.gradle file:
+```java
+allprojects {
+  repositories {
+    // ...
+    maven { url 'https://jitpack.io' }
+  }
+}
+```
+
+Add UIDAI-RDService-Manager library to your app build.gradle file:
+```java
+Dependencies {
+  // ...
+  implementation 'com.github.ekodevelops:eko-gateway-android-sdk:1.2.0'
+}
+```
+
+### STEP 2: Use the library in your Activity
+
+Implement RDServiceEvent interface:
+```java
+public class MyActivity extends AppCompatActivity implements RDServiceEvents
+```
+
+Initiate RDServiceManager in your activity's _onCreate()_:
+```java
+private RDServiceManager rdServiceManager;
+
+@Override
+protected void onCreate(Bundle savedInstanceState)
+{
+  // ...
+  rdServiceManager = new RDServiceManager.Builder(this).create();
+}
+```
+
+Setup RDService event callbacks:
+```java
+@Override
+public void onRDServiceDriverDiscovery(String rdServiceInfo, String rdServicePackage) {}
+
+@Override
+public void onRDServiceCaptureResponse(String pidData) {}
+
+@Override
+public void onRDServiceDriverDiscoveryFailed(int resultCode, Intent data, String pkg, String reason) {}
+
+@Override
+public void onRDServiceDriverNotFound() {}
+
+@Override
+public void onRDServiceCaptureFailed(int resultCode, Intent data, String pkg) {}
+```
+
+Search for installed RDService drivers:
+```java
+rdServiceManager.discoverRdService();
+```
+
+Initiate fingerprint capture:
+```java
+rdServiceManager.captureRdService(data);
+```
+
+## Configuration
+_TODO_
+
+## Examples
+_TODO_
