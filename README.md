@@ -38,7 +38,7 @@ Add UIDAI-RDService-Manager library to your app build.gradle file:
 ```java
 Dependencies {
   // ...
-  implementation 'com.github.ekodevelops:eko-gateway-android-sdk:1.2.0'
+  implementation 'com.github.ekoindia:android-uidai-rdservice-manager:<latest-version>'
 }
 ```
 
