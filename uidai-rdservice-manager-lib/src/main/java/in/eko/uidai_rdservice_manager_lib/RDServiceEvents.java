@@ -18,7 +18,7 @@ public interface RDServiceEvents {
 	 * A fingerprint scan data is received from the RDService.
 	 * @param pidData The fingerprint scan PID data as XML string
 	 */
-	public void onRDServiceCaptureResponse(String pidData);
+	public void onRDServiceCaptureResponse(String pidData, String rdServicePackage);
 
 	/**
 	 * No installed RDService driver was found.

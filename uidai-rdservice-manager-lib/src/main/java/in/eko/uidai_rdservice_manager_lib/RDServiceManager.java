@@ -246,7 +246,7 @@ public class RDServiceManager {
 
 		if (b != null) {
 			// sendWebViewResponse("rdservice_resp", b.getString("PID_DATA", ""));
-			mRDEvent.onRDServiceCaptureResponse(b.getString("PID_DATA", ""));
+			mRDEvent.onRDServiceCaptureResponse(b.getString("PID_DATA", ""), rd_service_package);
 
 			Log.i(TAG, "onRDServiceCaptureIntentResponse: Capture Info: \n\n PID-DATA = " + b.getString("PID_DATA", "") + "    \n\nDeviceNotConnected = " + b.getString("DNC", ""));
 		}
