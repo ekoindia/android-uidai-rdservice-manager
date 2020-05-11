@@ -49,6 +49,9 @@ public class MyActivity extends AppCompatActivity implements RDServiceEvents
 
 Initiate RDServiceManager in your activity's _onCreate()_:
 ```java
+import in.eko.uidai_rdservice_manager_lib.RDServiceEvents;
+import in.eko.uidai_rdservice_manager_lib.RDServiceManager;
+
 private RDServiceManager rdServiceManager;
 
 @Override
@@ -99,6 +102,9 @@ rdServiceManager.captureRdService(data);
 
 ## Configuration
 _TODO_
+
+## Javadocs
+https://ekoindia.github.io/android-uidai-rdservice-manager/
 
 ## Examples
 _TODO_
