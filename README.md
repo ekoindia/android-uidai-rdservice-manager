@@ -23,7 +23,7 @@ For reference, you may check out the latest [Aadhaar Registered Devices Technica
 ### STEP 1: Add library in your Android project
 
 Add jitpack in your root build.gradle file:
-```java
+```gradle
 allprojects {
   repositories {
     // ...
@@ -33,7 +33,7 @@ allprojects {
 ```
 
 Add UIDAI-RDService-Manager library to your app build.gradle file:
-```java
+```gradle
 Dependencies {
   // ...
   implementation 'com.github.ekoindia:android-uidai-rdservice-manager:<latest-version>'
