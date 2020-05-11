@@ -22,7 +22,7 @@ For reference, you may check out the latest [Aadhaar Registered Devices Technica
 
 ### STEP 1: Add library in your Android project
 
-Add jitpack in your root build.gradle file:
+Add jitpack in your root build.gradle file at the end of repositories:
 ```gradle
 allprojects {
   repositories {
@@ -32,7 +32,7 @@ allprojects {
 }
 ```
 
-Add UIDAI-RDService-Manager library to your app build.gradle file:
+Add UIDAI-RDService-Manager library dependency to your app build.gradle file:
 ```gradle
 Dependencies {
   // ...
@@ -67,16 +67,24 @@ Setup RDService event callbacks:
 @Override
 public void onRDServiceDriverDiscovery(String rdServiceInfo, String rdServicePackage) {
   // Called when an installed driver is discovered
+  //   rdServiceInfo: Status response as XML string from the discovered RDService device driver
+  //   rdServicePackage: The discovered RDService device driver package name
+  //   isWhitelisted: True if the discovered package is whitelisted, false otherwise
 }
 
 @Override
 public void onRDServiceCaptureResponse(String pidData, String rdServicePackage) {
   // Called when fingerprint is successfully captured
+  //   pidData: The fingerprint scan PID data as XML string
+  //   rdServicePackage: The package name of the RDService driver
 }
 
 @Override
 public void onRDServiceDriverDiscoveryFailed(int resultCode, Intent data, String rdServicePackage, String reason) {
-  // Called when a discovered driver fails to provide a proper status information 
+  // Called when a discovered driver fails to provide a proper status information
+  //   resultCode: The resultCode returned by the RDServiver driver activity
+  //   data: The data returned by the RDServiver driver activity
+  //   rdServicePackage: The package name of the RDService driver
 }
 
 @Override
@@ -87,6 +95,9 @@ public void onRDServiceDriverNotFound() {
 @Override
 public void onRDServiceCaptureFailed(int resultCode, Intent data, String rdServicePackage) {
   // Called when fingerprint capture fails
+  //   resultCode: The resultCode returned by the RDServiver driver activity
+  //   data: The data returned by the RDServiver driver activity
+  //   rdServicePackage: The package name of the RDService driver
 }
 ```
 
