@@ -44,14 +44,14 @@ Dependencies {
 
 Implement RDServiceEvent interface:
 ```java
-public class MyActivity extends AppCompatActivity implements RDServiceEvents
+import in.eko.uidai_rdservice_manager_lib.RDServiceEvents;
+import in.eko.uidai_rdservice_manager_lib.RDServiceManager;
+
+public class MyActivity extends AppCompatActivity implements RDServiceEvents {
 ```
 
 Initiate RDServiceManager in your activity's _onCreate()_:
 ```java
-import in.eko.uidai_rdservice_manager_lib.RDServiceEvents;
-import in.eko.uidai_rdservice_manager_lib.RDServiceManager;
-
 private RDServiceManager rdServiceManager;
 
 @Override
