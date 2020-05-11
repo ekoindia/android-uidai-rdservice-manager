@@ -17,6 +17,10 @@ import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
+/**
+ * Helper class to help capture fingerprint data by using RDService drivers for fingerprint-devices.
+ * @author https://github.com/manustays
+ */
 public class RDServiceManager {
 
 	private static final String TAG = "RDServiceManager";
@@ -149,7 +153,7 @@ public class RDServiceManager {
 		for (ResolveInfo resolveInfo : resolveInfoList) {
 			String _pkg = resolveInfo.activityInfo.packageName;
 
-			if (mapRDDriverWhitelist.containsKey(_pkg) && !mapRDDriverBlacklist.containsKey(_pkg)) {
+			if (!mapRDDriverBlacklist.containsKey(_pkg)) {
 				try {
 					// Assign an index to current RDService driver
 					int next_rdservice_index = mapRDDriverRCIndex.size() + 1;
@@ -228,7 +232,7 @@ public class RDServiceManager {
 
 			Log.d(TAG, "onRDServiceInfoResponse: " + b.getString("RD_SERVICE_INFO", "") + " //// " + rd_service_package);
 
-			mRDEvent.onRDServiceDriverDiscovery(b.getString("RD_SERVICE_INFO", ""), rd_service_package);
+			mRDEvent.onRDServiceDriverDiscovery(b.getString("RD_SERVICE_INFO", ""), rd_service_package, mapRDDriverWhitelist.containsKey(rd_service_package));
 
 			Log.i(TAG, "onRDServiceInfoResponse: Device Info: \n\n Device = " + b.getString("DEVICE_INFO", "") + "    \n\nRDService = " + b.getString("RD_SERVICE_INFO", ""));
 		}
