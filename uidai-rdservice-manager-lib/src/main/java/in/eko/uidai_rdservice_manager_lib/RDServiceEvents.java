@@ -2,6 +2,9 @@ package in.eko.uidai_rdservice_manager_lib;
 
 import android.content.Intent;
 
+/**
+ * An interface to implement RDServiceManager callback functions.
+ */
 public interface RDServiceEvents {
 
 	/**
@@ -26,14 +29,15 @@ public interface RDServiceEvents {
 	 * An installed RDService driver did not return a proper status.
 	 * @param resultCode The resultCode returned by the RDServiver driver activity
 	 * @param data The data returned by the RDServiver driver activity
-	 * @param pkg The package name of the RDService driver
+	 * @param rdServicePackage The package name of the RDService driver
 	 */
-	public void onRDServiceDriverDiscoveryFailed(int resultCode, Intent data, String pkg, String reason);
+	public void onRDServiceDriverDiscoveryFailed(int resultCode, Intent data, String rdServicePackage, String reason);
 
 	/**
 	 * Captured request sent to an RDService driver failed.
 	 * @param resultCode The resultCode returned by the RDServiver driver activity
 	 * @param data The data returned by the RDServiver driver activity
+	 * @param rdServicePackage The package name of the RDService driver
 	 */
-	public void onRDServiceCaptureFailed(int resultCode, Intent data, String pkg);
+	public void onRDServiceCaptureFailed(int resultCode, Intent data, String rdServicePackage);
 }
