@@ -62,7 +62,7 @@ protected void onCreate(Bundle savedInstanceState)
 }
 ```
 
-Setup RDService event callbacks in the yourActivity that implemented RDServiceEvent interface:
+Setup RDService event callbacks in the yourActivity that implemented the RDServiceEvent interface:
 ```java
 @Override
 public void onRDServiceDriverDiscovery(String rdServiceInfo, String rdServicePackage) {
