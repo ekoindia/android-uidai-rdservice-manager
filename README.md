@@ -42,7 +42,7 @@ Dependencies {
 
 ### STEP 2: Use the library in your Activity
 
-Implement RDServiceEvent interface:
+Implement RDServiceEvent interface in your Activity:
 ```java
 import in.eko.uidai_rdservice_manager_lib.RDServiceEvents;
 import in.eko.uidai_rdservice_manager_lib.RDServiceManager;
@@ -62,7 +62,7 @@ protected void onCreate(Bundle savedInstanceState)
 }
 ```
 
-Setup RDService event callbacks:
+Setup RDService event callbacks in the yourActivity that implemented RDServiceEvent interface:
 ```java
 @Override
 public void onRDServiceDriverDiscovery(String rdServiceInfo, String rdServicePackage) {
