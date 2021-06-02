@@ -62,6 +62,19 @@ protected void onCreate(Bundle savedInstanceState)
 }
 ```
 
+Setup `onActivityResult()` for RDService:
+```java
+@Override
+public void onActivityResult(int requestCode, int resultCode, Intent data) {
+  super.onActivityResult(requestCode, resultCode, data);
+
+  // Add this line -->
+  rdServiceManager.onActivityResult(requestCode, resultCode, data);
+
+  // ...
+}
+```
+
 Setup RDService event callbacks in the yourActivity that implemented the RDServiceEvent interface:
 ```java
 @Override
