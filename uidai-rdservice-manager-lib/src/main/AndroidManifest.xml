@@ -1,2 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="in.eko.uidai_rdservice_manager_lib" />
+	package="in.eko.uidai_rdservice_manager_lib" >
+
+	<queries>
+		<intent>
+			<action android:name="in.gov.uidai.rdservice.fp.INFO" />
+		</intent>
+	</queries>
+
+</manifest>
