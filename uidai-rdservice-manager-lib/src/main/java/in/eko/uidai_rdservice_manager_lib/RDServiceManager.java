@@ -40,7 +40,7 @@ public class RDServiceManager {
 			put("com.mantra.rdservice", "Mantra");
 			put("com.acpl.registersdk", "Startek FM220");
 			put("com.rd.gemalto.com.rdserviceapp", "Gemalto 3M Cogent CSD200");
-
+			
 			put("com.tatvik.bio.tmf20", "Tatvik TMF20");
 			put("com.evolute.rdservice", "Evolute");
 			put("com.precision.pb510.rdservice", "PB510");
