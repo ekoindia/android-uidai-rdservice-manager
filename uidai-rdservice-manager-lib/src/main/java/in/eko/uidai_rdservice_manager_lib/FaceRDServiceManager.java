@@ -12,12 +12,6 @@ import android.util.Log;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
-
 import static android.app.Activity.RESULT_OK;
 
 /**
@@ -26,17 +20,11 @@ import static android.app.Activity.RESULT_OK;
 public class FaceRDServiceManager {
 
     private static final String TAG = "FaceRDServiceManager";
-
     private static final String FACE_RD_PACKAGE = "in.gov.uidai.facerd";
-    private static final String FACE_CAPTURE_ACTION = "in.gov.uidai.rdservice.face.CAPTURE";
-
-    private static final int FACE_CAPTURE_REQ = 9001;
 
     private final RDServiceEvents mRDEvent;
     private final Activity activity;
     private final Context context;
-
-    private String pidOptsXml;
 
     /* ---------------- CONSTRUCTOR ---------------- */
 
@@ -69,7 +57,7 @@ public class FaceRDServiceManager {
     public void discoverFaceRdService() {
 
         Log.d(TAG, "discoverFaceRdService: Sending Face RD Service discovery response");
-        String faceRdServiceInfo = "<RDService info=\"Aadhar Face Rd Service\" status=\"READY\">\n" +
+        String faceRdServiceInfo = "<RDService info=\"Aadhar Face Rd Service\" status=\"READY\" type=\"face\">\n" +
                 "    <Interface id=\"CAPTURE\" path=\"in.gov.uidai.rdservice.face.CAPTURE\"/>\n" +
                 "    <Interface id=\"DEVICEINFO\" path=\"in.gov.uidai.rdservice.face.INFO\"/>\n" +
                 "</RDService>";
@@ -115,12 +103,10 @@ public class FaceRDServiceManager {
 		}
     }
 
-
     /**
-     * Handle Activity Result for Face RD Service
+     * Handle the result from Face RD Service capture intent and send response back to UI / WebView
      */
-	public void handleActivityResult(int requestCode, int resultCode, Intent data) {
-
+	public void onRDServiceCaptureIntentResponse(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "handleActivityResult called - requestCode: " + requestCode + ", resultCode: " + resultCode + ", data: " + (data != null ? "present" : "null"));
 
         if (requestCode != RD_SERVICE_RESPONSE_FACE) {
@@ -129,31 +115,7 @@ public class FaceRDServiceManager {
         }
 
         if (resultCode == Activity.RESULT_OK && data != null) {
-
-            // Log all extras to see what keys are available
-            Bundle extras = data.getExtras();
-            if (extras != null) {
-                Log.d(TAG, "Available extras: " + extras.keySet());
-                for (String key : extras.keySet()) {
-                    Log.d(TAG, "Key: " + key + ", Value: " + extras.get(key));
-                }
-            }
-
-            String pidData = data.getStringExtra("PID_DATA");
-
-            if (pidData == null || pidData.trim().isEmpty()) {
-                Log.e(TAG, "Face RD returned RESULT_OK but PID_DATA is null or empty");
-                Log.e(TAG, "Trying alternative key 'response'...");
-                pidData = data.getStringExtra("response");
-                
-                if (pidData == null || pidData.trim().isEmpty()) {
-                    Log.e(TAG, "No PID_DATA found in intent extras");
-                    mRDEvent.onRDServiceCaptureFailed(-1, data, FACE_RD_PACKAGE);
-                    return;
-                }
-            }
-
-            Log.d(TAG, "Face PID received successfully: " + pidData.substring(0, Math.min(100, pidData.length())) + "...");
+            String pidData = data.getStringExtra("response");
             mRDEvent.onRDServiceCaptureResponse(pidData, FACE_RD_PACKAGE);
 
         } else {
@@ -164,5 +126,4 @@ public class FaceRDServiceManager {
             mRDEvent.onRDServiceCaptureFailed(resultCode, data, FACE_RD_PACKAGE);
         }
     }
-
 }
