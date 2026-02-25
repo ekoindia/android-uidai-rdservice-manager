@@ -228,23 +228,11 @@ public class RDServiceManager {
 		Bundle b = data.getExtras();
 
 		if (b != null) {
-			
-			String rdServiceInfo = b.getString("RD_SERVICE_INFO", "");
-
-			// Add type="fingerprint" if not already present
-			if (rdServiceInfo != null && !rdServiceInfo.toLowerCase().contains("type=")) {
-
-				rdServiceInfo = rdServiceInfo.replaceFirst(
-						"<RDService",
-						"<RDService type=\"fingerprint\""
-				);
-			}
-
 			// sendWebViewResponse("rdservice_info", b.getString("RD_SERVICE_INFO", "") + "<RD_SERVICE_ANDROID_PACKAGE=\"" + rd_service_package + "\" />");
 
-			Log.d(TAG, "onRDServiceInfoResponse: " + rdServiceInfo + " //// " + rd_service_package);
+			Log.d(TAG, "onRDServiceInfoResponse: " + b.getString("RD_SERVICE_INFO", "") + " //// " + rd_service_package);
 
-			mRDEvent.onRDServiceDriverDiscovery(rdServiceInfo, rd_service_package, mapRDDriverWhitelist.containsKey(rd_service_package));
+			mRDEvent.onRDServiceDriverDiscovery(b.getString("RD_SERVICE_INFO", ""), rd_service_package, mapRDDriverWhitelist.containsKey(rd_service_package));
 
 			Log.i(TAG, "onRDServiceInfoResponse: Device Info: \n\n Device = " + b.getString("DEVICE_INFO", "") + "    \n\nRDService = " + b.getString("RD_SERVICE_INFO", ""));
 		}

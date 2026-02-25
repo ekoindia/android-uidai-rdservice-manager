@@ -1,16 +1,9 @@
 package in.eko.uidai_rdservice_manager_lib;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-
-import android.os.Bundle;
 import android.util.Log;
 import android.net.Uri;
-
 import androidx.annotation.NonNull;
 import static android.app.Activity.RESULT_OK;
 
@@ -50,23 +43,6 @@ public class FaceRDServiceManager {
 
 	
 	private static final int RD_SERVICE_RESPONSE_FACE = 1002;
-
-    /**
-     * Send Face RD Service discovery response with XML data
-     */
-    public void discoverFaceRdService() {
-
-        Log.d(TAG, "discoverFaceRdService: Sending Face RD Service discovery response");
-        String faceRdServiceInfo = "<RDService info=\"Aadhar Face Rd Service\" status=\"READY\" type=\"face\">\n" +
-                "    <Interface id=\"CAPTURE\" path=\"in.gov.uidai.rdservice.face.CAPTURE\"/>\n" +
-                "    <Interface id=\"DEVICEINFO\" path=\"in.gov.uidai.rdservice.face.INFO\"/>\n" +
-                "</RDService>";
-
-        Log.d(TAG, "discoverFaceRdService: " + faceRdServiceInfo);
-
-        // Send discovery response
-        mRDEvent.onRDServiceDriverDiscovery(faceRdServiceInfo, FACE_RD_PACKAGE, true);
-    }
 
     /**
      * capture Face RD Service with given PID options
