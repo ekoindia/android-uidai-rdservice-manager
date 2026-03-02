@@ -44,7 +44,7 @@ public class RDServiceManager {
 			put("com.tatvik.bio.tmf20", "Tatvik TMF20");
 			put("com.evolute.rdservice", "Evolute");
 			put("com.precision.pb510.rdservice", "PB510");
-			// put("com.mantra.mis100v2.rdservice", "MIS100V2 by Mantra");
+			put("com.mantra.mis100v2.rdservice", "MIS100V2 by Mantra");
 			put("com.nextbiometrics.rdservice", "NEXT Biometrics NB-3023");
 			put("com.iritech.rdservice", "IriTech IriShield");
 		}
