@@ -82,7 +82,7 @@ public class FaceRDServiceManager {
     /**
      * Handle the result from Face RD Service capture intent and send response back to UI / WebView
      */
-	public void onRDServiceCaptureIntentResponse(int requestCode, int resultCode, Intent data) {
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "handleActivityResult called - requestCode: " + requestCode + ", resultCode: " + resultCode + ", data: " + (data != null ? "present" : "null"));
 
         if (requestCode != RD_SERVICE_RESPONSE_FACE) {
