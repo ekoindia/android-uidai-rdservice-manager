@@ -34,7 +34,7 @@ public class RDServiceManager {
 	private static final Map<Integer, String> mapRDCaptureRC = new HashMap<Integer, String>();
 
 	private static final Map<String, String> mapRDDriverWhitelist = new HashMap<String, String>() {
-		{	
+		{
 			put("com.secugen.rdservice", "Secugen");
 			put("com.scl.rdservice", "Morpho");
 			put("com.mantra.rdservice", "Mantra");
@@ -138,13 +138,16 @@ public class RDServiceManager {
 	/**
 	 * Initiate discovery of installed RDService drivers on current device. For every discovered driver, the onRDServiceDriverDiscovery() will be called.
 	 */
-	public void discoverRdService(@NonNull String intentName ) {
-		Intent intentServiceList = new Intent(intentName);
+	public void discoverRdService() {
+		
+		mapRDDriverRCIndex.clear();
+		mapRDDiscoverRC.clear();
+		mapRDCaptureRC.clear();
+
+		Intent intentServiceList = new Intent("in.gov.uidai.rdservice.fp.INFO");
 		List<ResolveInfo> resolveInfoList = ((Activity) mRDEvent).getPackageManager().queryIntentActivities(intentServiceList, 0);
 
-		Log.i(TAG, "discoverRdService in string format: " +  resolveInfoList.toString()  + " ~-----------~ " + mapRDDiscoverRC.toString());
 		// String packageNamesStr = "";
-		Log.d(TAG, "blackliast RD servicesss" + mapRDDriverBlacklist.toString());
 
 		if (resolveInfoList.isEmpty()) {
 			mRDEvent.onRDServiceDriverNotFound();
@@ -155,46 +158,26 @@ public class RDServiceManager {
 		for (ResolveInfo resolveInfo : resolveInfoList) {
 			String _pkg = resolveInfo.activityInfo.packageName;
 
-			Log.e(TAG,"Package:=====> " + resolveInfo.activityInfo.packageName + " | Activity: " + resolveInfo.activityInfo.name);
-
 			if (!mapRDDriverBlacklist.containsKey(_pkg)) {
 				try {
-					// If this package has already been registered, skip creating duplicate mappings
-					if (!mapRDDriverRCIndex.containsKey(_pkg)) {
-						// Assign an index to current RDService driver
-						int next_rdservice_index = mapRDDriverRCIndex.size() + 1;
-						mapRDDriverRCIndex.put(_pkg, next_rdservice_index);
+					// Assign an index to current RDService driver
+					int next_rdservice_index = mapRDDriverRCIndex.size() + 1;
+					mapRDDriverRCIndex.put(_pkg, next_rdservice_index);
 
-						// Calculate and map request-code for the current RDService GetInfo Intent
-						int next_discover_rc_index = getRDServiceDiscoverRC(next_rdservice_index);
-						if (!mapRDDiscoverRC.containsKey(next_discover_rc_index)) {
-							mapRDDiscoverRC.put(next_discover_rc_index, _pkg);
-						}
+					// Calculate and map request-code for the current RDService GetInfo Intent
+					int next_discover_rc_index = getRDServiceDiscoverRC(next_rdservice_index);
+					mapRDDiscoverRC.put(next_discover_rc_index, _pkg);
 
-						// Calculate and map request-code for the current RDService Capture Intent
-						int next_capture_rc_index = getRDServiceCaptureRC(next_rdservice_index);
-						if (!mapRDCaptureRC.containsKey(next_capture_rc_index)) {
-							mapRDCaptureRC.put(next_capture_rc_index, _pkg);
-						}
+					// Calculate and map request-code for the current RDService Capture Intent
+					int next_capture_rc_index = getRDServiceCaptureRC(next_rdservice_index);
+					mapRDCaptureRC.put(next_capture_rc_index, _pkg);
 
-						// Get RD Service Info..
-						Intent intentInfo = new Intent(intentName);
+					// Get RD Service Info..
+					Intent intentInfo = new Intent("in.gov.uidai.rdservice.fp.INFO");
+					intentInfo.setPackage(_pkg);
+					((Activity) mRDEvent).startActivityForResult(intentInfo, next_discover_rc_index);
 
-						Log.d(TAG, "intentInfo===" + intentInfo.toString() + "package is:::" + _pkg);
-						intentInfo.setPackage(_pkg);
-						((Activity) mRDEvent).startActivityForResult(intentInfo, next_discover_rc_index);
-
-						Log.e(TAG, "RD SERVICE Package Found: (" + next_rdservice_index + ") " + next_discover_rc_index + " ~ " + _pkg + " ~~ " + mapRDDriverRCIndex + " ~ " + mapRDDiscoverRC);
-					} else {
-						// Package already registered; skip re-registering
-						int existingIndex = mapRDDriverRCIndex.get(_pkg);
-						int existingDiscoverRC = getRDServiceDiscoverRC(existingIndex);
-						Log.d(TAG, "RD SERVICE Package already registered: (" + existingIndex + ") " + _pkg +
-								" - reusing request code " + existingDiscoverRC);
-						Intent intentInfo = new Intent(intentName);
-						intentInfo.setPackage(_pkg);
-						((Activity) mRDEvent).startActivityForResult(intentInfo, existingDiscoverRC);
-					}
+					Log.e(TAG, "RD SERVICE Package Found: (" + next_rdservice_index + ") " + next_discover_rc_index + " ~ " + _pkg + " ~~ " + mapRDDriverRCIndex + " ~ " + mapRDDiscoverRC);
 				} catch (Exception e) {
 					e.printStackTrace();
 					mRDEvent.onRDServiceDriverDiscoveryFailed(0, null, _pkg, e.getMessage());
@@ -219,7 +202,7 @@ public class RDServiceManager {
 	 * @param rd_service_package The package name of the active RDService driver to be used for capture.
 	 * @param pid_options The PID-Options XML string to configure the RDService driver as per Aadhaar Registered Devices Specification v2.0 by UIDAI (https://uidai.gov.in/images/resource/Aadhaar_Registered_Devices_2_0_4.pdf).
 	 */
-	public void captureRdService(@NonNull String rd_service_package, @NonNull String pid_options, @NonNull String intentCaptureUrl) {
+	public void captureRdService(@NonNull String rd_service_package, @NonNull String pid_options) {
 
 		if (mapRDDriverRCIndex.containsKey(rd_service_package)) {
 			int capture_rc_index = mapRDDriverRCIndex.get(rd_service_package);
@@ -228,7 +211,7 @@ public class RDServiceManager {
 			Log.d(TAG, "RDSERVICE BEFORE CAPTURE: pid_options: (" + capture_rc_index + ") " + capture_rc + " ~ " + pid_options);
 
 			// Capture fingerprint using RD Service
-			Intent intentCapture = new Intent(intentCaptureUrl);
+			Intent intentCapture = new Intent("in.gov.uidai.rdservice.fp.CAPTURE");
 			intentCapture.setPackage(rd_service_package);
 			intentCapture.putExtra("PID_OPTIONS", pid_options);
 			((Activity) mRDEvent).startActivityForResult(intentCapture, capture_rc);
