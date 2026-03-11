@@ -139,6 +139,11 @@ public class RDServiceManager {
 	 * Initiate discovery of installed RDService drivers on current device. For every discovered driver, the onRDServiceDriverDiscovery() will be called.
 	 */
 	public void discoverRdService() {
+		
+		mapRDDriverRCIndex.clear();
+		mapRDDiscoverRC.clear();
+		mapRDCaptureRC.clear();
+
 		Intent intentServiceList = new Intent("in.gov.uidai.rdservice.fp.INFO");
 		List<ResolveInfo> resolveInfoList = ((Activity) mRDEvent).getPackageManager().queryIntentActivities(intentServiceList, 0);
 
