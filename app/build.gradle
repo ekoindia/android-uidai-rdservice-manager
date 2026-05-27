@@ -5,7 +5,7 @@ plugins {
 android {
     compileSdk 35
     namespace "in.eko.uidai_rdservice_manager_lib"
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "34.0.0"
 
     defaultConfig {
         applicationId "in.eko.uidai_rdservice_manager_lib"

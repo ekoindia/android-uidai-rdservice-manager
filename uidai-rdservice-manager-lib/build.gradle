@@ -1,8 +1,9 @@
 apply plugin: 'com.android.library'
 
 android {
+    namespace 'in.eko.uidai_rdservice_manager_lib'
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "34.0.0"
 
     defaultConfig {
         minSdkVersion 16
